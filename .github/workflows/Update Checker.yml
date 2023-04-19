@@ -46,7 +46,7 @@ jobs:
       uses: peter-evans/repository-dispatch@main
       with:
         token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        event-type: Source Code Update
+        event-type: ${{ env.date1 }}
 
     - name: 删除工作流
       uses: Mattraks/delete-workflow-runs@main
