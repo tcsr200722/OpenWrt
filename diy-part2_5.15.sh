@@ -65,6 +65,7 @@ git clone https://github.com/fw876/helloworld
 git clone https://github.com/vernesong/OpenClash
 git clone https://github.com/xiaorouji/openwrt-passwall
 git clone -b luci https://github.com/xiaorouji/openwrt-passwall passwall/
+git clone https://github.com/xiaorouji/openwrt-passwall2 passwall2/
 \cp -rn helloworld/* openwrt-passwall/
 rm -rf helloworld
 git clone https://github.com/xiangfeidexiaohuo/openwrt-packages
