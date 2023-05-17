@@ -64,7 +64,6 @@ git clone https://github.com/fw876/helloworld
 git clone https://github.com/vernesong/OpenClash
 git clone https://github.com/xiaorouji/openwrt-passwall
 git clone -b luci https://github.com/xiaorouji/openwrt-passwall passwall/
-git clone https://github.com/xiaorouji/openwrt-passwall2 passwall2/
 \cp -rn helloworld/* openwrt-passwall/
 rm -rf helloworld
 git clone https://github.com/xiangfeidexiaohuo/openwrt-packages
@@ -77,3 +76,4 @@ git clone https://github.com/kenzok8/openwrt-packages
 rm -rf openwrt-packages
 git clone https://github.com/linkease/istore
 sed -i 's/+luci-lib-ipkg/+luci-base/g' istore/luci/luci-app-store/Makefile
+git clone https://github.com/sirpdboy/chatgpt-web.git ./luci-app-chatgpt
