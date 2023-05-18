@@ -58,14 +58,21 @@ git clone https://github.com/sirpdboy/luci-app-autotimeset
 sed -i 's/control"/system"/g' luci-app-autotimeset/luasrc/controller/autotimeset.lua
 git clone https://github.com/sbwml/luci-app-alist
 git clone -b lede https://github.com/pymumu/luci-app-smartdns
-git clone https://github.com/jerrykuku/lua-maxminddb
-git clone https://github.com/jerrykuku/luci-app-vssr
+git clone https://github.com/kenzok8/small
+rm -rf small/luci-app-bypass
+rm -rf small/luci-app-passwall
+rm -rf small/luci-app-passwall2
+rm -rf small/luci-app-ssr-plus
+rm -rf small/luci-app-vssr
 git clone https://github.com/fw876/helloworld
-git clone https://github.com/vernesong/OpenClash
-git clone https://github.com/xiaorouji/openwrt-passwall
-git clone -b luci https://github.com/xiaorouji/openwrt-passwall passwall/
-rsync -av --update helloworld/* openwrt-passwall/
+\cp -rf helloworld/luci-app-ssr-plus .
 rm -rf helloworld
+git clone -b luci https://github.com/xiaorouji/openwrt-passwall
+\cp -rf openwrt-passwall/luci-app-passwall .
+rm -rf openwrt-passwall
+git clone https://github.com/jerrykuku/luci-app-vssr
+git clone https://github.com/jerrykuku/lua-maxminddb
+git clone https://github.com/vernesong/OpenClash
 git clone https://github.com/xiangfeidexiaohuo/openwrt-packages
 \cp -rf openwrt-packages/op-homebox .
 rm -rf openwrt-packages/op-socat/socat
