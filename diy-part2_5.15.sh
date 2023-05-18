@@ -64,7 +64,7 @@ git clone https://github.com/fw876/helloworld
 git clone https://github.com/vernesong/OpenClash
 git clone https://github.com/xiaorouji/openwrt-passwall
 git clone -b luci https://github.com/xiaorouji/openwrt-passwall passwall/
-rsync -avu helloworld/* openwrt-passwall/
+rsync -av --update helloworld/* openwrt-passwall/
 rm -rf helloworld
 git clone https://github.com/xiangfeidexiaohuo/openwrt-packages
 \cp -rf openwrt-packages/op-homebox .
