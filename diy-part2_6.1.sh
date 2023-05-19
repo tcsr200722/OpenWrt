@@ -70,8 +70,6 @@ rm -rf helloworld
 git clone -b luci https://github.com/xiaorouji/openwrt-passwall
 \cp -rf openwrt-passwall/luci-app-passwall .
 rm -rf openwrt-passwall
-git clone https://github.com/jerrykuku/luci-app-vssr
-git clone https://github.com/jerrykuku/lua-maxminddb
 git clone https://github.com/vernesong/OpenClash
 git clone https://github.com/xiangfeidexiaohuo/openwrt-packages
 \cp -rf openwrt-packages/op-homebox .
