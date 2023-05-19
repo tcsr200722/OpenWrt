@@ -81,4 +81,4 @@ git clone https://github.com/kenzok8/openwrt-packages
 rm -rf openwrt-packages
 git clone https://github.com/linkease/istore
 sed -i 's/+luci-lib-ipkg/+luci-base/g' istore/luci/luci-app-store/Makefile
-git clone https://github.com/sirpdboy/chatgpt-web.git ./luci-app-chatgpt
+git clone https://github.com/sirpdboy/chatgpt-web luci-app-chatgpt/
