@@ -71,6 +71,8 @@ git clone -b luci https://github.com/xiaorouji/openwrt-passwall
 \cp -rf openwrt-passwall/luci-app-passwall .
 rm -rf openwrt-passwall
 git clone https://github.com/vernesong/OpenClash
+\cp -rf OpenClash/luci-app-openclash .
+rm -rf OpenClash
 git clone https://github.com/xiangfeidexiaohuo/openwrt-packages
 \cp -rf openwrt-packages/op-homebox .
 rm -rf openwrt-packages/op-socat/socat
