@@ -20,7 +20,7 @@ jobs:
     - name: 获取哈希值
       id: getHash
       run: |
-        git clone --depth 1 -b $REPO_BRANCH $REPO_URL openwrt
+        git clone --depth 1 -b $REPO_BRANCH $REPO_URL .
         echo "commitHash=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
     - name: 比较哈希值
