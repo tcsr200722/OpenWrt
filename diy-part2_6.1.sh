@@ -56,7 +56,7 @@ svn export https://github.com/xiangfeidexiaohuo/openwrt-packages/trunk/op-socat/
 # 添加插件
 cd package/lean
 svn export https://github.com/ywt114/luci-app-advanced/trunk ./luci-app-advanced
-svn export https://github.com/pymumu/luci-app-smartdns/trunk ./luci-app-smartdns
+svn export https://github.com/pymumu/luci-app-smartdns/branches/lede ./luci-app-smartdns
 svn export https://github.com/sirpdboy/chatgpt-web/trunk ./luci-app-chatgpt
 svn export https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus ./luci-app-ssr-plus
 svn export https://github.com/xiaorouji/openwrt-passwall/branches/luci/luci-app-passwall ./luci-app-passwall
