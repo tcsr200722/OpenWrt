@@ -38,7 +38,7 @@ jobs:
     - name: 设置当前的日期
       id: date
       run: |
-        echo "date1=$(date +'%Y.%m.%d')" >> $GITHUB_ENV
+        echo "date1=$(date +'%Y%m%d')" >> $GITHUB_ENV
         sudo timedatectl set-timezone "$TZ"
 
     - name: 触发编译
@@ -47,9 +47,3 @@ jobs:
       with:
         token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         event-type: ${{ env.date1 }}
-
-    - name: 删除工作流
-      uses: Mattraks/delete-workflow-runs@main
-      with:
-        retain_days: 1
-        keep_minimum_runs: 1
