@@ -75,8 +75,4 @@ sed -i 's/control"/system"/g' luci-app-autotimeset/luasrc/controller/autotimeset
 svn co https://github.com/linkease/istore/trunk ./istore
 sed -i 's/+luci-lib-ipkg/+luci-base/g' istore/luci/luci-app-store/Makefile
 svn co https://github.com/kenzok8/small/trunk ./small
-rm -rf small/luci-app-bypass
-rm -rf small/luci-app-passwall
-rm -rf small/luci-app-passwall2
-rm -rf small/luci-app-ssr-plus
-rm -rf small/luci-app-vssr
+rm -rf small/luci-app-*
