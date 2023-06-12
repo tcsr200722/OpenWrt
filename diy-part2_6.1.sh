@@ -72,6 +72,7 @@ svn co https://github.com/xiangfeidexiaohuo/openwrt-packages/trunk/op-homebox ./
 svn co https://github.com/sbwml/luci-app-alist/trunk ./op-alist
 svn co https://github.com/sirpdboy/luci-app-autotimeset/trunk ./luci-app-autotimeset
 sed -i 's/control"/system"/g' luci-app-autotimeset/luasrc/controller/autotimeset.lua
+sed -i 's/control]/system]/g' luci-app-autotimeset/luasrc/view/autotimeset/log.htm
 svn co https://github.com/linkease/istore/trunk ./istore
 sed -i 's/+luci-lib-ipkg/+luci-base/g' istore/luci/luci-app-store/Makefile
 svn co https://github.com/kenzok8/small/trunk ./small
