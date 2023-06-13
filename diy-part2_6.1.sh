@@ -77,3 +77,12 @@ svn co https://github.com/linkease/istore/trunk ./istore
 sed -i 's/+luci-lib-ipkg/+luci-base/g' istore/luci/luci-app-store/Makefile
 svn co https://github.com/kenzok8/small/trunk ./small
 rm -rf small/luci-app-*
+svn co https://github.com/ywt114/luci-app-gpsysupgrade/trunk ./luci-app-gpsysupgrade
+sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+sed -i 's/Variable2 = "*.*"/Variable2 = "OpenWrt"/g' luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64_6.1"/g' luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+sed -i 's/Variable4 = "*.*"/Variable4 = "6.1"/g' luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+sed -i 's/Variable2 = "*.*"/Variable2 = "OpenWrt"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64_6.1"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+sed -i 's/Variable4 = "*.*"/Variable4 = "6.1"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
