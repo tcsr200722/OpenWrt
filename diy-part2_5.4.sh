@@ -22,7 +22,7 @@ sed -i "s/hostname='*.*'/hostname='OpenWrt'/" package/base-files/files/bin/confi
 sed -i "s/DISTRIB_ID='*.*'/DISTRIB_ID='OpenWrt'/g" package/base-files/files/etc/openwrt_release
 sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='OpenWrt'/g"  package/base-files/files/etc/openwrt_release
 sed -i '/(<%=pcdata(ver.luciversion)%>)/a\      built by ywt114' package/lean/autocore/files/x86/index.htm
-echo "$(date +'%Y%m%d')" > package/base-files/files/etc/openwrt_version
+echo -n "$(date +'%Y%m%d')" > package/base-files/files/etc/openwrt_version
 
 # 修改部分默认设置
 sed -i "/exit 0/i sed -i '\/oui\/d' \/etc\/opkg\/distfeeds.conf" package/lean/default-settings/files/zzz-default-settings
