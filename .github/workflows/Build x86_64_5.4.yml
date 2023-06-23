@@ -73,6 +73,12 @@ jobs:
       run: |
         ./scripts/feeds update -a
 
+    - name: 执行回滚
+      working-directory: ./openwrt
+      run: |
+        cd feeds/packages
+        git reset --hard fa96401fae81b7fd578403ea57ee989f1cf323b3^
+
     - name: 安装 feeds
       working-directory: ./openwrt
       run: |
