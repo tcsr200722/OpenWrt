@@ -122,10 +122,9 @@ jobs:
         df -hT
 
     - name: 重命名文件
-      working-directory: ./openwrt
       if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
-        cd bin/targets/x86/64/
+        cd openwrt/bin/targets/x86/64/
         rename -v 's/^/${{ env.date1 }}-5.15-/' openwrt*.gz || true
 
     - name: 整理文件
@@ -163,7 +162,7 @@ jobs:
 
     - name: 上传固件发布
       uses: softprops/action-gh-release@master
-      if: steps.tag.outputs.status == 'success' && !cancelled()
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       env:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       with:
