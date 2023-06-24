@@ -14,10 +14,7 @@ env:
   CONFIG_FILE: x86_64.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2_6.1.sh
-  UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
-  UPLOAD_COWTRANSFER: false
-  UPLOAD_WETRANSFER: false
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
 
@@ -107,6 +104,7 @@ jobs:
         prefix: 'openwrt'
 
     - name: 编译前空间情况
+      if: (!cancelled())
       run: |
         df -hT
 
@@ -119,18 +117,20 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 编译后空间情况
+      if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         df -hT
 
     - name: 重命名文件
       working-directory: ./openwrt
+      if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         cd bin/targets/x86/64/
         rename -v 's/^/${{ env.date1 }}-6.1-/' openwrt*.gz || true
 
     - name: 整理文件
       id: organize
-      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         mkdir -p firmware
         mkdir -p firmware/package/
@@ -148,7 +148,7 @@ jobs:
 
     - name: 上传固件目录
       uses: actions/upload-artifact@main
-      if: steps.organize.outputs.status == 'success' && !cancelled()
+      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       with:
         name: ${{ env.date1 }}_${{matrix.target}}
         path: ${{ env.FIRMWARE }}
