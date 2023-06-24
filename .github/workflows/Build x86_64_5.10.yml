@@ -14,6 +14,7 @@ env:
   CONFIG_FILE: x86_64.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2_5.10.sh
+  REVERT_COMMIT: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -71,9 +72,9 @@ jobs:
         ./scripts/feeds update -a
 
     - name: 执行回滚
-      working-directory: ./openwrt
+      if: env.REVERT_COMMIT == 'true' && !cancelled()
       run: |
-        cd feeds/packages
+        cd openwrt/feeds/packages
         git reset --hard fa96401fae81b7fd578403ea57ee989f1cf323b3^
 
     - name: 安装 feeds
