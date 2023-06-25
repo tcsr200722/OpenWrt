@@ -51,11 +51,13 @@ svn co https://github.com/pymumu/openwrt-smartdns/trunk feeds/packages/net/smart
 rm -rf feeds/packages/net/adguardhome
 svn co https://github.com/kenzok8/openwrt-packages/trunk/adguardhome feeds/packages/net/adguardhome
 rm -rf feeds/packages/net/mosdns
-rm -rf feeds/luci/applications/luci-app-mosdns
 svn co https://github.com/kenzok8/openwrt-packages/trunk/mosdns feeds/packages/net/mosdns
+rm -rf feeds/luci/applications/luci-app-mosdns
+svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-mosdns feeds/luci/applications/luci-app-mosdns
 rm -rf feeds/packages/net/socat
-rm -rf feeds/luci/applications/luci-app-socat
 svn co https://github.com/xiangfeidexiaohuo/openwrt-packages/trunk/op-socat/socat feeds/packages/net/socat
+rm -rf feeds/luci/applications/luci-app-socat
+svn co https://github.com/xiangfeidexiaohuo/openwrt-packages/trunk/op-socat/luci-app-socat feeds/luci/applications/luci-app-socat
 rm -rf feeds/packages/utils/v2dat
 svn co https://github.com/kenzok8/openwrt-packages/trunk/v2dat feeds/packages/utils/v2dat
 
@@ -68,8 +70,6 @@ svn co https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus ./luci-app-ss
 svn co https://github.com/xiaorouji/openwrt-passwall/branches/luci/luci-app-passwall ./luci-app-passwall
 svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash ./luci-app-openclash
 svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-adguardhome ./luci-app-adguardhome
-svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-mosdns ./luci-app-mosdns
-svn co https://github.com/xiangfeidexiaohuo/openwrt-packages/trunk/op-socat/luci-app-socat ./luci-app-socat
 svn co https://github.com/xiangfeidexiaohuo/openwrt-packages/trunk/op-homebox ./op-homebox
 svn co https://github.com/sbwml/luci-app-alist/trunk ./op-alist
 svn co https://github.com/sirpdboy/luci-app-autotimeset/trunk ./luci-app-autotimeset
