@@ -88,4 +88,3 @@ sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' luci-app-gpsysupgrade/root/u
 sed -i 's/Variable2 = "*.*"/Variable2 = "test"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
 sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64_5.4"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
 sed -i 's/Variable4 = "*.*"/Variable4 = "5.4"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
-
