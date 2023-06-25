@@ -50,10 +50,12 @@ rm -rf feeds/packages/net/smartdns
 svn co https://github.com/pymumu/openwrt-smartdns/trunk feeds/packages/net/smartdns
 rm -rf feeds/packages/net/adguardhome
 svn co https://github.com/kenzok8/openwrt-packages/trunk/adguardhome feeds/packages/net/adguardhome
-rm -rf feeds/packages/net/socat
-svn co https://github.com/xiangfeidexiaohuo/openwrt-packages/trunk/op-socat/socat feeds/packages/net/socat
 rm -rf feeds/packages/net/mosdns
+rm -rf feeds/luci/applications/luci-app-mosdns
 svn co https://github.com/kenzok8/openwrt-packages/trunk/mosdns feeds/packages/net/mosdns
+rm -rf feeds/packages/net/socat
+rm -rf feeds/luci/applications/luci-app-socat
+svn co https://github.com/xiangfeidexiaohuo/openwrt-packages/trunk/op-socat/socat feeds/packages/net/socat
 rm -rf feeds/packages/utils/v2dat
 svn co https://github.com/kenzok8/openwrt-packages/trunk/v2dat feeds/packages/utils/v2dat
 
@@ -79,10 +81,10 @@ svn co https://github.com/kenzok8/small/trunk ./small
 rm -rf small/luci-app-*
 svn co https://github.com/ywt114/luci-app-gpsysupgrade/trunk ./luci-app-gpsysupgrade
 sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
-sed -i 's/Variable2 = "*.*"/Variable2 = "OpenWrt"/g' luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
-sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64_5.10"/g' luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
-sed -i 's/Variable4 = "*.*"/Variable4 = "5.10"/g' luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+sed -i 's/Variable2 = "*.*"/Variable2 = "test"/g' luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64_5.4"/g' luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+sed -i 's/Variable4 = "*.*"/Variable4 = "5.4"/g' luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
 sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
-sed -i 's/Variable2 = "*.*"/Variable2 = "OpenWrt"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
-sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64_5.10"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
-sed -i 's/Variable4 = "*.*"/Variable4 = "5.10"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+sed -i 's/Variable2 = "*.*"/Variable2 = "test"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64_5.4"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+sed -i 's/Variable4 = "*.*"/Variable4 = "5.4"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
