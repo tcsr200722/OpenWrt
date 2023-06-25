@@ -77,13 +77,13 @@ git clone https://github.com/xiangfeidexiaohuo/openwrt-packages package/lean/ope
 \cp -rf package/lean/openwrt-packages/op-homebox/homebox package/lean/homebox
 \cp -rf package/lean/openwrt-packages/op-homebox/luci-app-homebox package/lean/luci-app-homebox
 \rm -rf package/lean/openwrt-packages
-git clone https://github.com/ywt114/luci-app-advanced package/lean/luci-app-advanced
 git clone https://github.com/sirpdboy/chatgpt-web package/lean/luci-app-chatgpt
 git clone https://github.com/sirpdboy/luci-app-autotimeset package/lean/luci-app-autotimeset
 sed -i 's/control"/system"/g' package/lean/luci-app-autotimeset/luasrc/controller/autotimeset.lua
 sed -i 's/control]/system]/g' package/lean/luci-app-autotimeset/luasrc/view/autotimeset/log.htm
 git clone https://github.com/linkease/istore package/lean/istore
 sed -i 's/+luci-lib-ipkg/+luci-base/g' package/lean/istore/luci/luci-app-store/Makefile
+git clone https://github.com/ywt114/luci-app-advanced package/lean/luci-app-advanced
 git clone https://github.com/ywt114/luci-app-gpsysupgrade package/lean/luci-app-gpsysupgrade
 sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
 sed -i 's/Variable2 = "*.*"/Variable2 = "test"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
