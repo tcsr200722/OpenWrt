@@ -43,48 +43,53 @@ sed -i 's/ssid=*.*/ssid=OpenWrt/g' package/kernel/mac80211/files/lib/wifi/mac802
 curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/poweroff.htm > feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_system/poweroff.htm
 curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/system.lua > feeds/luci/modules/luci-mod-admin-full/luasrc/controller/admin/system.lua
 
-# 删除替换默认源插件
-rm -rf feeds/packages/lang/golang
-svn co https://github.com/sbwml/packages_lang_golang/branches/19.x feeds/packages/lang/golang
-rm -rf feeds/packages/net/smartdns
-svn co https://github.com/pymumu/openwrt-smartdns/trunk feeds/packages/net/smartdns
-rm -rf feeds/packages/net/adguardhome
-svn co https://github.com/kenzok8/openwrt-packages/trunk/adguardhome feeds/packages/net/adguardhome
-rm -rf feeds/packages/net/mosdns
-svn co https://github.com/kenzok8/openwrt-packages/trunk/mosdns feeds/packages/net/mosdns
-rm -rf feeds/luci/applications/luci-app-mosdns
-svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-mosdns feeds/luci/applications/luci-app-mosdns
-rm -rf feeds/packages/net/socat
-svn co https://github.com/xiangfeidexiaohuo/openwrt-packages/trunk/op-socat/socat feeds/packages/net/socat
-rm -rf feeds/luci/applications/luci-app-socat
-svn co https://github.com/xiangfeidexiaohuo/openwrt-packages/trunk/op-socat/luci-app-socat feeds/luci/applications/luci-app-socat
-rm -rf feeds/packages/utils/v2dat
-svn co https://github.com/kenzok8/openwrt-packages/trunk/v2dat feeds/packages/utils/v2dat
-
-# 添加插件
-cd package/lean
-svn co https://github.com/ywt114/luci-app-advanced/trunk ./luci-app-advanced
-svn co https://github.com/pymumu/luci-app-smartdns/branches/lede ./luci-app-smartdns
-svn co https://github.com/sirpdboy/chatgpt-web/trunk ./luci-app-chatgpt
-svn co https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus ./luci-app-ssr-plus
-svn co https://github.com/xiaorouji/openwrt-passwall/branches/luci/luci-app-passwall ./luci-app-passwall
-svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash ./luci-app-openclash
-svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-adguardhome ./luci-app-adguardhome
-svn co https://github.com/xiangfeidexiaohuo/openwrt-packages/trunk/op-homebox ./op-homebox
-svn co https://github.com/sbwml/luci-app-alist/trunk ./op-alist
-svn co https://github.com/sirpdboy/luci-app-autotimeset/trunk ./luci-app-autotimeset
-sed -i 's/control"/system"/g' luci-app-autotimeset/luasrc/controller/autotimeset.lua
-sed -i 's/control]/system]/g' luci-app-autotimeset/luasrc/view/autotimeset/log.htm
-svn co https://github.com/linkease/istore/trunk ./istore
-sed -i 's/+luci-lib-ipkg/+luci-base/g' istore/luci/luci-app-store/Makefile
-svn co https://github.com/kenzok8/small/trunk ./small
-rm -rf small/luci-app-*
-svn co https://github.com/ywt114/luci-app-gpsysupgrade/trunk ./luci-app-gpsysupgrade
-sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
-sed -i 's/Variable2 = "*.*"/Variable2 = "test"/g' luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
-sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64_5.4"/g' luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
-sed -i 's/Variable4 = "*.*"/Variable4 = "5.4"/g' luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
-sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
-sed -i 's/Variable2 = "*.*"/Variable2 = "test"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
-sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64_5.4"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
-sed -i 's/Variable4 = "*.*"/Variable4 = "5.4"/g' luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+# 删除替换默认源插件和添加插件
+\rm -rf feeds/packages/lang/golang
+git clone -b 19.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+git clone https://github.com/sbwml/luci-app-alist package/lean/op-alist
+\cp -rf package/lean/op-alist/alist package/lean/alist
+\cp -rf package/lean/op-alist/luci-app-alist package/lean/luci-app-alist
+\rm -rf package/lean/op-alist
+\rm -rf feeds/packages/net/smartdns
+git clone https://github.com/pymumu/openwrt-smartdns feeds/packages/net/smartdns
+git clone -b lede https://github.com/pymumu/luci-app-smartdns package/lean/luci-app-smartdns
+git clone https://github.com/kenzok8/small package/lean/small
+\rm -rf package/lean/small/luci-app-bypass
+\rm -rf package/lean/small/luci-app-vssr
+\rm -rf package/lean/small/luci-app-passwall2
+\rm -rf feeds/packages/net/adguardhome
+\rm -rf feeds/packages/net/mosdns
+\rm -rf feeds/luci/applications/luci-app-mosdns
+\rm -rf feeds/packages/utils/v2dat
+git clone https://github.com/kenzok8/openwrt-packages package/lean/openwrt-packages
+\cp -rf package/lean/openwrt-packages/luci-app-openclash package/lean/small/luci-app-openclash
+\cp -rf package/lean/openwrt-packages/adguardhome feeds/packages/net/adguardhome
+\cp -rf package/lean/openwrt-packages/luci-app-adguardhome package/lean/luci-app-adguardhome
+\cp -rf package/lean/openwrt-packages/mosdns feeds/packages/net/mosdns
+\cp -rf package/lean/openwrt-packages/luci-app-mosdns package/lean/luci-app-mosdns
+\cp -rf package/lean/openwrt-packages/v2dat feeds/packages/utils/v2dat
+\rm -rf package/lean/openwrt-packages
+\rm -rf feeds/packages/net/socat
+\rm -rf feeds/luci/applications/luci-app-socat
+git clone https://github.com/xiangfeidexiaohuo/openwrt-packages package/lean/openwrt-packages
+\cp -rf package/lean/openwrt-packages/op-socat/socat feeds/packages/net/socat
+\cp -rf package/lean/openwrt-packages/op-socat/luci-app-socat package/lean/luci-app-socat
+\cp -rf package/lean/openwrt-packages/op-homebox/homebox package/lean/homebox
+\cp -rf package/lean/openwrt-packages/op-homebox/luci-app-homebox package/lean/luci-app-homebox
+\rm -rf package/lean/openwrt-packages
+git clone https://github.com/ywt114/luci-app-advanced package/lean/luci-app-advanced
+git clone https://github.com/sirpdboy/chatgpt-web package/lean/luci-app-chatgpt
+git clone https://github.com/sirpdboy/luci-app-autotimeset package/lean/luci-app-autotimeset
+sed -i 's/control"/system"/g' package/lean/luci-app-autotimeset/luasrc/controller/autotimeset.lua
+sed -i 's/control]/system]/g' package/lean/luci-app-autotimeset/luasrc/view/autotimeset/log.htm
+git clone https://github.com/linkease/istore package/lean/istore
+sed -i 's/+luci-lib-ipkg/+luci-base/g' package/lean/istore/luci/luci-app-store/Makefile
+git clone https://github.com/ywt114/luci-app-gpsysupgrade package/lean/luci-app-gpsysupgrade
+sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+sed -i 's/Variable2 = "*.*"/Variable2 = "test"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64_5.4"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+sed -i 's/Variable4 = "*.*"/Variable4 = "5.4"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+sed -i 's/Variable2 = "*.*"/Variable2 = "test"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64_5.4"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+sed -i 's/Variable4 = "*.*"/Variable4 = "5.4"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
