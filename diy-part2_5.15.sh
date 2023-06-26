@@ -87,10 +87,10 @@ sed -i 's/+luci-lib-ipkg/+luci-base/g' package/lean/istore/luci/luci-app-store/M
 git clone https://github.com/ywt114/luci-app-advanced package/lean/luci-app-advanced
 git clone https://github.com/ywt114/luci-app-gpsysupgrade package/lean/luci-app-gpsysupgrade
 sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
-sed -i 's/Variable2 = "*.*"/Variable2 = "test"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
-sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64_5.4"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
-sed -i 's/Variable4 = "*.*"/Variable4 = "5.4"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+sed -i 's/Variable2 = "*.*"/Variable2 = "OpenWrt"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64_5.15"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+sed -i 's/Variable4 = "*.*"/Variable4 = "5.15"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
 sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
-sed -i 's/Variable2 = "*.*"/Variable2 = "test"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
-sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64_5.4"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
-sed -i 's/Variable4 = "*.*"/Variable4 = "5.4"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+sed -i 's/Variable2 = "*.*"/Variable2 = "OpenWrt"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64_5.15"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+sed -i 's/Variable4 = "*.*"/Variable4 = "5.15"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
