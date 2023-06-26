@@ -60,6 +60,7 @@ git clone https://github.com/kenzok8/small package/lean/small
 \rm -rf package/lean/small/luci-app-vssr
 \rm -rf package/lean/small/luci-app-passwall2
 \rm -rf feeds/packages/net/adguardhome
+\rm -rf feeds/luci/applications/luci-app-adguardhome
 \rm -rf feeds/packages/net/mosdns
 \rm -rf feeds/luci/applications/luci-app-mosdns
 \rm -rf feeds/packages/utils/v2dat
