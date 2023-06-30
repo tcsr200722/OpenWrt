@@ -51,5 +51,6 @@ jobs:
     - name: 删除工作流
       uses: Mattraks/delete-workflow-runs@main
       with:
+        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         retain_days: 1
         keep_minimum_runs: 1
