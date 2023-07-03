@@ -151,14 +151,14 @@ jobs:
 
     - name: 上传固件目录
       uses: actions/upload-artifact@main
-      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+      if: steps.organize.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       with:
         name: ${{ env.date1 }}_${{matrix.target}}
         path: ${{ env.FIRMWARE }}
 
     - name: 生成发布标签
       id: tag
-      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      if: steps.organize.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
         echo "release_tag=${{ env.date1 }}" >> $GITHUB_OUTPUT
         touch release.txt
@@ -166,7 +166,7 @@ jobs:
 
     - name: 上传固件发布
       uses: softprops/action-gh-release@master
-      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      if: steps.organize.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
       env:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       with:
