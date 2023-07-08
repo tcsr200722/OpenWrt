@@ -46,7 +46,7 @@ curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/system.lua > f
 
 # 删除替换默认源插件和添加插件
 \rm -rf feeds/packages/lang/golang
-git clone -b 19.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+git clone -b 20.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 git clone https://github.com/sbwml/luci-app-alist package/lean/op-alist
 \cp -rf package/lean/op-alist/alist package/lean/alist
 \cp -rf package/lean/op-alist/luci-app-alist package/lean/luci-app-alist
