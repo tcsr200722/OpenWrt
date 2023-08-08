@@ -85,7 +85,17 @@ git clone https://github.com/sirpdboy/luci-app-autotimeset package/lean/luci-app
 sed -i 's/control"/system"/g' package/lean/luci-app-autotimeset/luasrc/controller/autotimeset.lua
 sed -i 's/control]/system]/g' package/lean/luci-app-autotimeset/luasrc/view/autotimeset/log.htm
 git clone https://github.com/linkease/istore package/lean/istore
-sed -i 's/+luci-lib-ipkg/+luci-base/g' package/lean/istore/luci/luci-app-store/Makefile
+# sed -i 's/+luci-lib-ipkg/+luci-base/g' package/lean/istore/luci/luci-app-store/Makefile
+\cp -rf package/lean/istore/luci package/lean
+\cp -rf package/lean/istore/translations package/lean
+\rm -rf package/lean/istore
+git clone https://github.com/linkease/nas-packages-luci package/lean/nas-packages-luci
+\cp -ur package/lean/nas-packages-luci/luci package/lean
+\rm -rf package/lean/nas-packages-luci
+git clone https://github.com/linkease/nas-packages package/lean/nas-packages
+\cp -ur package/lean/nas-packages/network/services package/network
+\cp -ur package/lean/nas-packages/multimedia package
+\rm -rf package/lean/nas-packages
 git clone https://github.com/ywt114/luci-app-advanced package/lean/luci-app-advanced
 git clone https://github.com/ywt114/luci-app-gpsysupgrade package/lean/luci-app-gpsysupgrade
 sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
