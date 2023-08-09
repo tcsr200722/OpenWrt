@@ -90,11 +90,11 @@ git clone https://github.com/linkease/istore package/lean/istore
 \cp -rf package/lean/istore/translations package/lean
 \rm -rf package/lean/istore
 git clone https://github.com/linkease/nas-packages-luci package/lean/nas-packages-luci
-\cp -ur package/lean/nas-packages-luci/luci package/lean
+\cp -rf package/lean/nas-packages-luci/luci/* package/lean/luci
 \rm -rf package/lean/nas-packages-luci
 git clone https://github.com/linkease/nas-packages package/lean/nas-packages
-\cp -ur package/lean/nas-packages/network/services package/network
-\cp -ur package/lean/nas-packages/multimedia package
+\cp -rf package/lean/nas-packages/network/services/* package/network/services
+\cp -rf package/lean/nas-packages/multimedia package
 \rm -rf package/lean/nas-packages
 git clone https://github.com/ywt114/luci-app-advanced package/lean/luci-app-advanced
 git clone https://github.com/ywt114/luci-app-gpsysupgrade package/lean/luci-app-gpsysupgrade
