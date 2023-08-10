@@ -77,8 +77,8 @@ jobs:
     - name: 执行回滚
       if: env.REVERT_COMMIT == 'true' && !cancelled()
       run: |
-        cd openwrt/feeds/packages
-        git reset --hard fa96401fae81b7fd578403ea57ee989f1cf323b3^
+        cd $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/directory1)
+        git reset --hard $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/commit1)
 
     - name: 安装 feeds
       working-directory: ./openwrt
