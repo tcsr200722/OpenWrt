@@ -40,8 +40,8 @@ jobs:
       run: |
         docker rmi $(docker images -q)
         sudo -E rm -rf $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/depends1) "$AGENT_TOOLSDIRECTORY" || true
-        sudo -E apt -yqq purge $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/depends2) || true
         sudo -E apt -yqq update
+        sudo -E apt -yqq purge $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/depends2) || true
         sudo -E apt -yqq full-upgrade
         sudo -E apt -yqq install $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/depends3) || true
         sudo -E apt -yqq autoremove --purge
