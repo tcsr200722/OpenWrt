@@ -34,14 +34,23 @@ jobs:
     - name: 检查
       uses: actions/checkout@main
 
+    - name: 释放磁盘空间
+      uses: jlumbroso/free-disk-space@main
+      with:
+        tool-cache: false
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+
     - name: 初始化环境
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        docker rmi $(docker images -q)
-        sudo -E rm -rf $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/depends1) "$AGENT_TOOLSDIRECTORY" || true
+        sudo -E rm -rf "$AGENT_TOOLSDIRECTORY" || true
         sudo -E apt -yqq update
-        sudo -E apt -yqq purge $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/depends2) || true
         sudo -E apt -yqq full-upgrade
         sudo -E apt -yqq install $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/depends3) || true
         sudo -E apt -yqq autoremove --purge
