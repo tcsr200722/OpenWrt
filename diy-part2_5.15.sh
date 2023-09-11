@@ -9,8 +9,11 @@ sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=5.15/g" target/linux/x86/Makefil
 sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=5.15/g" target/linux/x86/Makefile
 
 # 交换LAN/WAN口
-sed -i 's/"eth1 eth2" "eth0"/"eth1 eth2 eth3" "eth0"/g' target/linux/x86/base-files/etc/board.d/02_network
-sed -i "s/'eth1 eth2' 'eth0'/'eth1 eth2 eht3' 'eth0'/g" target/linux/x86/base-files/etc/board.d/02_network
+sed -i 's/"eth1 eth2" "eth0"/"eth1 eth2" "eth0"/g' target/linux/x86/base-files/etc/board.d/02_network
+sed -i "s/'eth1 eth2' 'eth0'/'eth1 eth2' 'eth0'/g" target/linux/x86/base-files/etc/board.d/02_network
+sed -i "s/lan 'eth0'/lan 'eth0'/g" package/base-files/files/etc/board.d/99-default_network
+sed -i "s/wan 'eth1'/wan 'eth1'/g" package/base-files/files/etc/board.d/99-default_network
+sed -i "s/net\/eth1/net\/eth1/g" package/base-files/files/etc/board.d/99-default_network
 
 # 修改默认皮肤
 sed -i 's/luci-theme-bootstrap/luci-theme-argon-mod/g' feeds/luci/collections/luci/Makefile
