@@ -54,9 +54,8 @@ git clone https://github.com/sbwml/luci-app-alist package/lean/op-alist
 \cp -rf package/lean/op-alist/alist package/lean/alist
 \cp -rf package/lean/op-alist/luci-app-alist package/lean/luci-app-alist
 \rm -rf package/lean/op-alist
-\rm -rf feeds/luci/applications/luci-app-adbyby-plus
-# git clone https://github.com/ywt114/luci-app-adbyby-plus-lite package/lean/luci-app-adbyby-plus-lite
-git clone https://github.com/ywt114/luci-app-adbyby-plus feeds/luci/applications/luci-app-adbyby-plus
+# \rm -rf feeds/luci/applications/luci-app-adbyby-plus
+# git clone https://github.com/ywt114/luci-app-adbyby-plus feeds/luci/applications/luci-app-adbyby-plus
 \rm -rf feeds/packages/net/smartdns
 \rm -rf feeds/luci/applications/luci-app-smartdns
 git clone https://github.com/pymumu/openwrt-smartdns feeds/packages/net/smartdns
@@ -67,16 +66,16 @@ git clone https://github.com/kenzok8/small package/lean/small
 \rm -rf package/lean/small/luci-app-passwall2
 \rm -rf feeds/packages/net/adguardhome
 \rm -rf feeds/luci/applications/luci-app-adguardhome
-\rm -rf feeds/packages/net/mosdns
-\rm -rf feeds/luci/applications/luci-app-mosdns
-\rm -rf feeds/packages/utils/v2dat
+# \rm -rf feeds/packages/net/mosdns
+# \rm -rf feeds/luci/applications/luci-app-mosdns
+# \rm -rf feeds/packages/utils/v2dat
 git clone https://github.com/kenzok8/openwrt-packages package/lean/openwrt-packages
 \cp -rf package/lean/openwrt-packages/luci-app-openclash package/lean/small/luci-app-openclash
 \cp -rf package/lean/openwrt-packages/adguardhome feeds/packages/net/adguardhome
 \cp -rf package/lean/openwrt-packages/luci-app-adguardhome package/lean/luci-app-adguardhome
-\cp -rf package/lean/openwrt-packages/mosdns feeds/packages/net/mosdns
-\cp -rf package/lean/openwrt-packages/luci-app-mosdns package/lean/luci-app-mosdns
-\cp -rf package/lean/openwrt-packages/v2dat feeds/packages/utils/v2dat
+# \cp -rf package/lean/openwrt-packages/mosdns feeds/packages/net/mosdns
+# \cp -rf package/lean/openwrt-packages/luci-app-mosdns package/lean/luci-app-mosdns
+# \cp -rf package/lean/openwrt-packages/v2dat feeds/packages/utils/v2dat
 \rm -rf package/lean/openwrt-packages
 \rm -rf feeds/packages/net/socat
 \rm -rf feeds/luci/applications/luci-app-socat
