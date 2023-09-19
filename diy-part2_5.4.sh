@@ -56,7 +56,7 @@ git clone https://github.com/sbwml/luci-app-alist package/lean/op-alist
 \rm -rf package/lean/op-alist
 \rm -rf feeds/luci/applications/luci-app-adbyby-plus
 # git clone https://github.com/ywt114/luci-app-adbyby-plus-lite package/lean/luci-app-adbyby-plus-lite
-git clone https://github.com/ywt114/luci-app-adbyby-plus package/lean/luci-app-adbyby-plus
+git clone https://github.com/ywt114/luci-app-adbyby-plus feeds/luci/applications/luci-app-adbyby-plus
 \rm -rf feeds/packages/net/smartdns
 \rm -rf feeds/luci/applications/luci-app-smartdns
 git clone https://github.com/pymumu/openwrt-smartdns feeds/packages/net/smartdns
