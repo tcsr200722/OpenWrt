@@ -54,12 +54,12 @@ git clone https://github.com/sbwml/luci-app-alist package/lean/op-alist
 \cp -rf package/lean/op-alist/alist package/lean/alist
 \cp -rf package/lean/op-alist/luci-app-alist package/lean/luci-app-alist
 \rm -rf package/lean/op-alist
-# \rm -rf feeds/luci/applications/luci-app-adbyby-plus
-# git clone https://github.com/ywt114/luci-app-adbyby-plus feeds/luci/applications/luci-app-adbyby-plus
-\rm -rf feeds/packages/net/smartdns
-\rm -rf feeds/luci/applications/luci-app-smartdns
-git clone https://github.com/pymumu/openwrt-smartdns feeds/packages/net/smartdns
-git clone -b lede https://github.com/pymumu/luci-app-smartdns package/lean/luci-app-smartdns
+\rm -rf feeds/luci/applications/luci-app-adbyby-plus
+git clone https://github.com/ywt114/luci-app-adbyby-plus feeds/luci/applications/luci-app-adbyby-plus
+# \rm -rf feeds/packages/net/smartdns
+# \rm -rf feeds/luci/applications/luci-app-smartdns
+# git clone https://github.com/pymumu/openwrt-smartdns feeds/packages/net/smartdns
+# git clone -b lede https://github.com/pymumu/luci-app-smartdns package/lean/luci-app-smartdns
 git clone https://github.com/kenzok8/small package/lean/small
 \rm -rf package/lean/small/luci-app-bypass
 \rm -rf package/lean/small/luci-app-vssr
@@ -77,11 +77,11 @@ git clone https://github.com/kenzok8/openwrt-packages package/lean/openwrt-packa
 # \cp -rf package/lean/openwrt-packages/luci-app-mosdns package/lean/luci-app-mosdns
 # \cp -rf package/lean/openwrt-packages/v2dat feeds/packages/utils/v2dat
 \rm -rf package/lean/openwrt-packages
-\rm -rf feeds/packages/net/socat
-\rm -rf feeds/luci/applications/luci-app-socat
+# \rm -rf feeds/packages/net/socat
+# \rm -rf feeds/luci/applications/luci-app-socat
 git clone https://github.com/xiangfeidexiaohuo/openwrt-packages package/lean/openwrt-packages
-\cp -rf package/lean/openwrt-packages/op-socat/socat feeds/packages/net/socat
-\cp -rf package/lean/openwrt-packages/op-socat/luci-app-socat package/lean/luci-app-socat
+# \cp -rf package/lean/openwrt-packages/op-socat/socat feeds/packages/net/socat
+# \cp -rf package/lean/openwrt-packages/op-socat/luci-app-socat package/lean/luci-app-socat
 \cp -rf package/lean/openwrt-packages/op-homebox/homebox package/lean/homebox
 \cp -rf package/lean/openwrt-packages/op-homebox/luci-app-homebox package/lean/luci-app-homebox
 \rm -rf package/lean/openwrt-packages
@@ -91,17 +91,17 @@ sed -i 's/control"/system"/g' package/lean/luci-app-autotimeset/luasrc/controlle
 sed -i 's/control]/system]/g' package/lean/luci-app-autotimeset/luasrc/view/autotimeset/log.htm
 git clone https://github.com/linkease/istore package/lean/istore
 # sed -i 's/+luci-lib-ipkg/+luci-base/g' package/lean/istore/luci/luci-app-store/Makefile
-\cp -rf package/lean/istore/luci package/lean
+\cp -rf package/lean/istore/luci/* package/lean
 \cp -rf package/lean/istore/translations package/lean
 \rm -rf package/lean/istore
 git clone https://github.com/linkease/nas-packages-luci package/lean/nas-packages-luci
-\cp -rf package/lean/nas-packages-luci/luci/* package/lean/luci
+\cp -rf package/lean/nas-packages-luci/luci/* package/lean
 \rm -rf package/lean/nas-packages-luci
 git clone https://github.com/linkease/nas-packages package/lean/nas-packages
 \cp -rf package/lean/nas-packages/network/services/* package/network/services
-\cp -rf package/lean/nas-packages/multimedia package
+\cp -rf package/lean/nas-packages/multimedia/* feeds/packages/multimedia
 \rm -rf package/lean/nas-packages
-git clone https://github.com/ywt114/luci-app-advanced package/lean/luci-app-advanced
+git clone https://github.com/sirpdboy/luci-app-advanced package/lean/luci-app-advanced
 git clone https://github.com/ywt114/luci-app-gpsysupgrade package/lean/luci-app-gpsysupgrade
 sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
 sed -i 's/Variable2 = "*.*"/Variable2 = "OpenWrt"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
