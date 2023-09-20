@@ -99,7 +99,7 @@ git clone https://github.com/linkease/nas-packages-luci package/lean/nas-package
 \rm -rf package/lean/nas-packages-luci
 git clone https://github.com/linkease/nas-packages package/lean/nas-packages
 \cp -rf package/lean/nas-packages/network/services/* package/network/services
-\cp -rf package/lean/nas-packages/multimedia/* feeds/packages/multimedia
+\cp -rf package/lean/nas-packages/multimedia package
 \rm -rf package/lean/nas-packages
 git clone https://github.com/sirpdboy/luci-app-advanced package/lean/luci-app-advanced
 git clone https://github.com/ywt114/luci-app-gpsysupgrade package/lean/luci-app-gpsysupgrade
