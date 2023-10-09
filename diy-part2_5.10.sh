@@ -86,13 +86,13 @@ git clone https://github.com/xiangfeidexiaohuo/openwrt-packages package/lean/ope
 \cp -rf package/lean/openwrt-packages/op-homebox/homebox package/lean/homebox
 \cp -rf package/lean/openwrt-packages/op-homebox/luci-app-homebox package/lean/luci-app-homebox
 \rm -rf package/lean/openwrt-packages
-git clone https://github.com/linkease/openwrt-app-actions package/lean/openwrt-app-actions
-\cp -rf package/lean/openwrt-app-actions/applications/luci-app-multiaccountdial package/lean/luci-app-multiaccountdial
-\rm -rf package/lean/openwrt-app-actions
 git clone https://github.com/sirpdboy/chatgpt-web package/lean/luci-app-chatgpt
 git clone https://github.com/sirpdboy/luci-app-autotimeset package/lean/luci-app-autotimeset
 sed -i 's/control"/system"/g' package/lean/luci-app-autotimeset/luasrc/controller/autotimeset.lua
 sed -i 's/control]/system]/g' package/lean/luci-app-autotimeset/luasrc/view/autotimeset/log.htm
+git clone https://github.com/linkease/openwrt-app-actions package/lean/openwrt-app-actions
+\cp -rf package/lean/openwrt-app-actions/applications/luci-app-multiaccountdial package/lean/luci-app-multiaccountdial
+\rm -rf package/lean/openwrt-app-actions
 git clone https://github.com/linkease/istore package/lean/istore
 # sed -i 's/+luci-lib-ipkg/+luci-base/g' package/lean/istore/luci/luci-app-store/Makefile
 \cp -rf package/lean/istore/luci/* package/lean
