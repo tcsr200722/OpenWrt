@@ -160,7 +160,7 @@ jobs:
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       with:
         name: ${{ env.date1 }}_${{matrix.target}}
-        path: ./firmware/
+        path: ./firmware/**
 
     - name: 生成发布标签
       id: tag
@@ -176,7 +176,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       with:
-        files: ./firmware/*
+        files: ./firmware/**
         name: ${{ env.date1 }}_${{matrix.target}}
         tag_name: ${{matrix.target}}
         body_path: release.txt
