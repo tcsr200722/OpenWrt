@@ -65,8 +65,6 @@ jobs:
       id: date
       run: |
         echo "date1=$(date +'%Y%m%d')" >> $GITHUB_ENV
-        VERSION="$(echo "${{github.event.action}}" | grep -Eo " [0-9.]+" | sed -e 's/ //')" || true
-        [ "$VERSION" ] && echo "VERSION=$VERSION" >> $GITHUB_ENV || echo "VERSION=$(date +'%Y%m%d')" >> $GITHUB_ENV
 
     - name: 克隆源代码
       run: |
@@ -155,7 +153,6 @@ jobs:
         md5=$((md5sum *squashfs-combined-efi.i*gz) | awk '{print $1}') 2>/dev/null
         echo -n "$md5" > md5sum.txt
         rm -rf sha256sums
-        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 上传固件目录
@@ -163,7 +160,7 @@ jobs:
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       with:
         name: ${{ env.date1 }}_${{matrix.target}}
-        path: ${{ env.FIRMWARE }}
+        path: ./firmware/**
 
     - name: 生成发布标签
       id: tag
@@ -179,7 +176,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       with:
-        files: "${{ env.FIRMWARE }}/*"
+        files: ./firmware/**
         name: ${{ env.date1 }}_${{matrix.target}}
         tag_name: ${{matrix.target}}
         body_path: release.txt
