@@ -144,10 +144,10 @@ jobs:
       run: |
         mkdir -p firmware
         mkdir -p firmware/package/
-        mv -f openwrt/bin/targets/x86/64/{*squashfs-combined-efi.i*gz,*sysupgrade*} firmware/ 2>/dev/null || true
-        cp $(find openwrt/bin/packages/ -type f -name "*.ipk") firmware/package/
-        cp openwrt/.config firmware/${{matrix.target}}.config
-        cp openwrt/build_dir/target-*/linux-*/linux-*/.config firmware/${{matrix.target}}_kernel.config
+        find openwrt/bin/targets/ -type f \( -name "*squashfs-combined-efi.i*gz" -o -name "*sysupgrade*" \) -exec mv {} ./firmware/ \; 2>/dev/null || true
+        find openwrt/bin/packages/ -type f -name "*.ipk" -exec cp {} ./firmware/package/ \; 2>/dev/null || true
+        cp openwrt/.config ./firmware/${{matrix.target}}.config
+        cp openwrt/build_dir/target-*/linux-*/linux-*/.config ./firmware/${{matrix.target}}_kernel.config
         cd firmware
         echo -n "${{ env.date1 }}" > version.txt
         md5=$((md5sum *squashfs-combined-efi.i*gz) | awk '{print $1}') 2>/dev/null
