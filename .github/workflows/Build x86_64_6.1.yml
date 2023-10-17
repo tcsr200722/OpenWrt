@@ -145,7 +145,7 @@ jobs:
         mkdir -p firmware
         mkdir -p firmware/package/
         find openwrt/bin/targets/ -type f \( -name "*squashfs-combined-efi.i*gz" -o -name "*sysupgrade*" \) -exec mv {} ./firmware/ \; 2>/dev/null || true
-        find openwrt/bin/packages/ -type f -name "*.ipk" -exec cp {} ./firmware/package/ \; 2>/dev/null || true
+        find openwrt/bin/packages/ -type f \( -name "*.ipk" \) -exec cp {} ./firmware/package/ \; 2>/dev/null || true
         cp openwrt/.config ./firmware/${{matrix.target}}.config
         cp openwrt/build_dir/target-*/linux-*/linux-*/.config ./firmware/${{matrix.target}}_kernel.config
         cd firmware
@@ -176,7 +176,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       with:
-        files: ./firmware/**
+        files: ./firmware/*.*
         name: ${{ env.date1 }}_${{matrix.target}}
         tag_name: ${{matrix.target}}
         body_path: release.txt
