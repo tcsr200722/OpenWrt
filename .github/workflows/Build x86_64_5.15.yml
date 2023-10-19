@@ -60,13 +60,13 @@ jobs:
         sudo -E apt -yqq autoclean
         sudo -E apt -yqq clean
         sudo -E systemctl daemon-reload
-        sudo -E timedatectl set-timezone "$TZ"
 
         df -hT
 
     - name: 设置当前的日期
       id: date
       run: |
+        sudo timedatectl set-timezone "$TZ"
         echo "date1=$(date +'%Y%m%d')" >> $GITHUB_ENV
 
     - name: 克隆源代码
