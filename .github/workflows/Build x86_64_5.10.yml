@@ -25,11 +25,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 360
 
-    name: Build ${{matrix.target}}
+    name: Build ${{ matrix.target.arch }}_${{ matrix.target.kernel }}
     strategy:
       fail-fast: false
       matrix:
-        target: [x86_64_5.10]
+        target:
+          - arch: "x86_64"
+            kernel: "5.10"
 
     steps:
     - name: 检查
@@ -53,7 +55,7 @@ jobs:
         sudo -E rm -rf "$AGENT_TOOLSDIRECTORY" || true
         sudo -E apt -yqq update
         sudo -E apt -yqq full-upgrade
-        sudo -E apt -yqq install $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/depends3) || true
+        sudo -E apt -yqq install $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/depends) || true
         sudo -E apt -yqq autoremove --purge
         sudo -E apt -yqq autoclean
         sudo -E apt -yqq clean
@@ -86,8 +88,8 @@ jobs:
     - name: 执行回滚
       if: env.REVERT_COMMIT == 'true' && !cancelled()
       run: |
-        cd $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/directory1)
-        git reset --hard $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/commit1)
+        cd $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/directory)
+        git reset --hard $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/commit)
 
     - name: 安装 feeds
       working-directory: ./openwrt
@@ -137,8 +139,7 @@ jobs:
     - name: 重命名文件
       if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
-        cd openwrt/bin/targets/x86/64/
-        rename -v 's/^/${{ env.date1 }}-5.10-/' openwrt*.gz || true
+        find openwrt/bin/targets -type f \( -name "openwrt*.gz" \) -exec sh -c 'mv "$1" "$(dirname "$1")/${{ env.date1 }}-${{ matrix.target.kernel }}-$(basename "$1")"' sh {} \; 2>/dev/null || true
 
     - name: 整理文件
       id: organize
@@ -146,13 +147,13 @@ jobs:
       run: |
         mkdir -p firmware
         mkdir -p firmware/package/
-        find openwrt/bin/targets/ -type f \( -name "*squashfs-combined-efi.i*gz" -o -name "*sysupgrade*" \) -exec mv {} ./firmware/ \; 2>/dev/null || true
+        find openwrt/bin/targets/ -type f \( -name "*squashfs-combined-efi*.gz" -o -name "*sysupgrade*" \) -exec mv {} ./firmware/ \; 2>/dev/null || true
         find openwrt/bin/packages/ -type f \( -name "*.ipk" \) -exec mv {} ./firmware/package/ \; 2>/dev/null || true
-        mv openwrt/.config ./firmware/${{matrix.target}}.config 2>/dev/null || true
-        mv openwrt/build_dir/target-*/linux-*/linux-*/.config ./firmware/${{matrix.target}}_kernel.config 2>/dev/null || true
+        mv openwrt/.config ./firmware/${{ matrix.target.arch }}_${{ matrix.target.kernel }}.config 2>/dev/null || true
+        mv openwrt/build_dir/target-*/linux-*/linux-*/.config ./firmware/${{ matrix.target.arch }}_${{ matrix.target.kernel }}_kernel.config 2>/dev/null || true
         cd firmware
         echo -n "${{ env.date1 }}" > version.txt
-        md5=$((md5sum *squashfs-combined-efi.i*gz) | awk '{print $1}') 2>/dev/null || true
+        md5=$(md5sum *squashfs-combined-efi*.gz | awk '{print $1}') 2>/dev/null || true
         echo -n "$md5" > md5sum.txt
         rm -rf sha256sums
         echo "status=success" >> $GITHUB_OUTPUT
@@ -161,7 +162,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       with:
-        name: ${{ env.date1 }}_${{matrix.target}}
+        name: ${{ env.date1 }}_${{ matrix.target.arch }}_${{ matrix.target.kernel }}
         path: ./firmware/**
 
     - name: 生成发布标签
@@ -179,8 +180,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       with:
         files: ./firmware/*.*
-        name: ${{ env.date1 }}_${{matrix.target}}
-        tag_name: ${{matrix.target}}
+        name: ${{ env.date1 }}_${{ matrix.target.arch }}_${{ matrix.target.kernel }}
+        tag_name: ${{ matrix.target.arch }}_${{ matrix.target.kernel }}
         body_path: release.txt
 
     - name: 删除工作流
