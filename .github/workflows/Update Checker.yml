@@ -1,9 +1,12 @@
 name: Update Checker
 
 on:
+  repository_dispatch:
   workflow_dispatch:
   schedule:
     - cron: '0 18 * * 5'
+#  watch:
+#    types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
