@@ -41,8 +41,8 @@ jobs:
     - name: 设置当前的日期
       id: date
       run: |
-        echo "date1=$(date +'%Y%m%d')" >> $GITHUB_ENV
         sudo timedatectl set-timezone "$TZ"
+        echo "date1=$(date +'%Y%m%d')" >> $GITHUB_ENV
 
     - name: 触发编译
       if: steps.cacheHash.outputs.cache-hit != 'true'
