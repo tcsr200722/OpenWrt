@@ -150,6 +150,7 @@ jobs:
         find openwrt/bin/packages/ -type f \( -name "*.ipk" \) -exec mv {} ./firmware/package/ \; 2>/dev/null || true
         mv openwrt/.config ./firmware/${{ matrix.target.arch }}_${{ matrix.target.kernel }}.config 2>/dev/null || true
         mv openwrt/build_dir/target-*/linux-*/linux-*/.config ./firmware/${{ matrix.target.arch }}_${{ matrix.target.kernel }}_kernel.config 2>/dev/null || true
+        [ -e release ] && cp release ./firmware/release.txt
         cd firmware
         echo -n "${{ env.date1 }}" > version.txt
         md5=$(md5sum *squashfs-combined-efi*.gz | awk '{print $1}') 2>/dev/null || true
@@ -169,7 +170,7 @@ jobs:
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
         echo "release_tag=${{ env.date1 }}" >> $GITHUB_OUTPUT
-        [ -e release ] && mv release ./release.txt
+        [ -e release ] && cp release ./release.txt
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 上传固件发布
