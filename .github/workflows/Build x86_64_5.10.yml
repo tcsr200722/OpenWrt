@@ -170,6 +170,7 @@ jobs:
       run: |
         echo "release_tag=${{ env.date1 }}" >> $GITHUB_OUTPUT
         touch release.txt
+        cat "$GITHUB_WORKSPACE/release.txt" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 上传固件发布
