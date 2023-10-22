@@ -106,6 +106,7 @@ git clone https://github.com/linkease/nas-packages package/lean/nas-packages
 \cp -rf package/lean/nas-packages/multimedia package
 \rm -rf package/lean/nas-packages
 git clone https://github.com/sirpdboy/luci-app-advanced package/lean/luci-app-advanced
+
 sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
 sed -i 's/Variable2 = "*.*"/Variable2 = "OpenWrt"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
 sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
