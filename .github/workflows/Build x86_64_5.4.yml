@@ -170,8 +170,7 @@ jobs:
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
         echo "release_tag=${{ env.date1 }}" >> $GITHUB_OUTPUT
-        touch release.txt
-        cat "$GITHUB_WORKSPACE/release.txt" >> release.txt
+        [ -e release ] && mv release ./release.txt
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 上传固件发布
