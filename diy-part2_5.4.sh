@@ -109,6 +109,7 @@ git clone https://github.com/sirpdboy/luci-app-advanced package/lean/luci-app-ad
 
 sed -i '/mt7921/s/^/# /' ./.config
 sed -i '/wpad/s/^/# /' ./.config
+sed -i '/hostapd/s/^/# /' ./.config
 sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
 sed -i 's/Variable2 = "*.*"/Variable2 = "OpenWrt"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
 sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
