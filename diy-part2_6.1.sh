@@ -58,10 +58,11 @@ git clone -b master https://github.com/sbwml/luci-app-alist package/lean/alist
 git clone -b v5 https://github.com/sbwml/luci-app-mosdns package/lean/mosdns
 \rm -rf feeds/luci/applications/luci-app-adbyby-plus
 git clone -b main https://github.com/ywt114/luci-app-adbyby-plus-lite package/lean/luci-app-adbyby-plus-lite
+\rm -rf feeds/packages/net/msd_lite
 git clone -b main https://github.com/ywt114/luci-app-msd_lite package/lean/msd_lite
 git clone -b master https://github.com/ywt114/luci-app-gpsysupgrade package/lean/luci-app-gpsysupgrade
 \rm -rf feeds/packages/net/smartdns feeds/luci/applications/luci-app-smartdns
-git clone -b master https://github.com/pymumu/openwrt-smartdns feeds/packages/net/smartdns
+git clone -b master https://github.com/pymumu/openwrt-smartdns package/lean/smartdns
 git clone -b lede https://github.com/pymumu/luci-app-smartdns package/lean/luci-app-smartdns
 git clone -b master https://github.com/kenzok8/small package/lean/small
 \rm -rf package/lean/small/luci-app-bypass package/lean/small/luci-app-vssr package/lean/small/luci-app-passwall2
@@ -70,14 +71,12 @@ git clone -b master https://github.com/kenzok8/openwrt-packages package/lean/ope
 \rm -rf package/lean/openwrt-packages
 \rm -rf feeds/packages/net/socat feeds/luci/applications/luci-app-socat
 git clone -b master https://github.com/xiangfeidexiaohuo/openwrt-packages package/lean/openwrt-packages
-\cp -rf package/lean/openwrt-packages/op-socat/socat feeds/packages/net/socat
-\cp -rf package/lean/openwrt-packages/op-socat/luci-app-socat package/lean/luci-app-socat
-\cp -rf package/lean/openwrt-packages/op-homebox/homebox package/lean/homebox
-\cp -rf package/lean/openwrt-packages/op-homebox/luci-app-homebox package/lean/luci-app-homebox
+\cp -rf package/lean/openwrt-packages/op-socat package/lean/socat
+\cp -rf package/lean/openwrt-packages/op-homebox package/lean/homebox
 \rm -rf package/lean/openwrt-packages
 \rm -rf feeds/packages/net/adguardhome feeds/luci/applications/luci-app-adguardhome
 git clone -b main https://github.com/sirpdboy/sirpdboy-package package/lean/sirpdboy-package
-\cp -rf package/lean/sirpdboy-package/adguardhome feeds/packages/net/adguardhome
+\cp -rf package/lean/sirpdboy-package/adguardhome package/lean/adguardhome
 \cp -rf package/lean/sirpdboy-package/luci-app-adguardhome package/lean/luci-app-adguardhome
 \rm -rf package/lean/sirpdboy-package
 git clone -b main https://github.com/sirpdboy/chatgpt-web package/lean/luci-app-chatgpt
