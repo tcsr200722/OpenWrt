@@ -48,65 +48,58 @@ curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/poweroff.htm >
 curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/system.lua > feeds/luci/modules/luci-mod-admin-full/luasrc/controller/admin/system.lua
 
 # 删除替换默认源插件和添加插件
+# find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
+# find ./ | grep Makefile | grep pdnsd-alt | xargs rm -f
+\rm -rf feeds/packages/net/v2ray-geodata feeds/packages/net/pdnsd-alt
 # \rm -rf feeds/packages/lang/golang
 # git clone -b 21.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
-git clone https://github.com/sbwml/luci-app-alist package/lean/op-alist
-\cp -rf package/lean/op-alist/alist package/lean/alist
-\cp -rf package/lean/op-alist/luci-app-alist package/lean/luci-app-alist
-\rm -rf package/lean/op-alist
+git clone -b master https://github.com/sbwml/luci-app-alist package/lean/alist
+\rm -rf feeds/packages/net/mosdns feeds/luci/applications/luci-app-mosdns feeds/packages/utils/v2dat
+git clone -b v5 https://github.com/sbwml/luci-app-mosdns package/lean/mosdns
 \rm -rf feeds/luci/applications/luci-app-adbyby-plus
-git clone https://github.com/ywt114/luci-app-adbyby-plus-lite package/lean/luci-app-adbyby-plus-lite
-git clone https://github.com/ywt114/luci-app-msd_lite package/lean/luci-app-msd_lite
-git clone https://github.com/ywt114/luci-app-gpsysupgrade package/lean/luci-app-gpsysupgrade
-# \rm -rf feeds/packages/net/smartdns
-# \rm -rf feeds/luci/applications/luci-app-smartdns
-# git clone https://github.com/pymumu/openwrt-smartdns feeds/packages/net/smartdns
-# git clone -b lede https://github.com/pymumu/luci-app-smartdns package/lean/luci-app-smartdns
-git clone https://github.com/kenzok8/small package/lean/small
-\rm -rf package/lean/small/luci-app-bypass
-\rm -rf package/lean/small/luci-app-vssr
-\rm -rf package/lean/small/luci-app-passwall2
-\rm -rf feeds/packages/net/adguardhome
-\rm -rf feeds/luci/applications/luci-app-adguardhome
-# \rm -rf feeds/packages/net/mosdns
-# \rm -rf feeds/luci/applications/luci-app-mosdns
-# \rm -rf feeds/packages/utils/v2dat
-git clone https://github.com/kenzok8/openwrt-packages package/lean/openwrt-packages
+git clone -b main https://github.com/ywt114/luci-app-adbyby-plus-lite package/lean/luci-app-adbyby-plus-lite
+git clone -b main https://github.com/ywt114/luci-app-msd_lite package/lean/msd_lite
+git clone -b master https://github.com/ywt114/luci-app-gpsysupgrade package/lean/luci-app-gpsysupgrade
+\rm -rf feeds/packages/net/smartdns feeds/luci/applications/luci-app-smartdns
+git clone -b master https://github.com/pymumu/openwrt-smartdns feeds/packages/net/smartdns
+git clone -b lede https://github.com/pymumu/luci-app-smartdns package/lean/luci-app-smartdns
+git clone -b master https://github.com/kenzok8/small package/lean/small
+\rm -rf package/lean/small/luci-app-bypass package/lean/small/luci-app-vssr package/lean/small/luci-app-passwall2
+git clone -b master https://github.com/kenzok8/openwrt-packages package/lean/openwrt-packages
 \cp -rf package/lean/openwrt-packages/luci-app-openclash package/lean/small/luci-app-openclash
-\cp -rf package/lean/openwrt-packages/adguardhome feeds/packages/net/adguardhome
-\cp -rf package/lean/openwrt-packages/luci-app-adguardhome package/lean/luci-app-adguardhome
-# \cp -rf package/lean/openwrt-packages/mosdns feeds/packages/net/mosdns
-# \cp -rf package/lean/openwrt-packages/luci-app-mosdns package/lean/luci-app-mosdns
-# \cp -rf package/lean/openwrt-packages/v2dat feeds/packages/utils/v2dat
 \rm -rf package/lean/openwrt-packages
-# \rm -rf feeds/packages/net/socat
-# \rm -rf feeds/luci/applications/luci-app-socat
-git clone https://github.com/xiangfeidexiaohuo/openwrt-packages package/lean/openwrt-packages
-# \cp -rf package/lean/openwrt-packages/op-socat/socat feeds/packages/net/socat
-# \cp -rf package/lean/openwrt-packages/op-socat/luci-app-socat package/lean/luci-app-socat
+\rm -rf feeds/packages/net/socat feeds/luci/applications/luci-app-socat
+git clone -b master https://github.com/xiangfeidexiaohuo/openwrt-packages package/lean/openwrt-packages
+\cp -rf package/lean/openwrt-packages/op-socat/socat feeds/packages/net/socat
+\cp -rf package/lean/openwrt-packages/op-socat/luci-app-socat package/lean/luci-app-socat
 \cp -rf package/lean/openwrt-packages/op-homebox/homebox package/lean/homebox
 \cp -rf package/lean/openwrt-packages/op-homebox/luci-app-homebox package/lean/luci-app-homebox
 \rm -rf package/lean/openwrt-packages
-git clone https://github.com/sirpdboy/chatgpt-web package/lean/luci-app-chatgpt
-git clone https://github.com/sirpdboy/luci-app-autotimeset package/lean/luci-app-autotimeset
+\rm -rf feeds/packages/net/adguardhome feeds/luci/applications/luci-app-adguardhome
+git clone -b main https://github.com/sirpdboy/sirpdboy-package package/lean/sirpdboy-package
+\cp -rf package/lean/sirpdboy-package/adguardhome feeds/packages/net/adguardhome
+\cp -rf package/lean/sirpdboy-package/luci-app-adguardhome package/lean/luci-app-adguardhome
+\rm -rf package/lean/sirpdboy-package
+git clone -b main https://github.com/sirpdboy/chatgpt-web package/lean/luci-app-chatgpt
+git clone -b master https://github.com/sirpdboy/luci-app-advanced package/lean/luci-app-advanced
+git clone -b master https://github.com/sirpdboy/luci-app-autotimeset package/lean/luci-app-autotimeset
 sed -i 's/control"/system"/g' package/lean/luci-app-autotimeset/luasrc/controller/autotimeset.lua
 sed -i 's/control]/system]/g' package/lean/luci-app-autotimeset/luasrc/view/autotimeset/log.htm
-git clone https://github.com/linkease/openwrt-app-actions package/lean/openwrt-app-actions
+git clone -b main https://github.com/linkease/openwrt-app-actions package/lean/openwrt-app-actions
 \cp -rf package/lean/openwrt-app-actions/applications/luci-app-multiaccountdial package/lean/luci-app-multiaccountdial
 \rm -rf package/lean/openwrt-app-actions
-git clone https://github.com/linkease/istore package/lean/istore
+git clone -b main https://github.com/linkease/istore package/lean/istore
 # sed -i 's/+luci-lib-ipkg/+luci-base/g' package/lean/istore/luci/luci-app-store/Makefile
 \cp -rf package/lean/istore/luci/* package/lean
 \cp -rf package/lean/istore/translations package/lean
 \rm -rf package/lean/istore
-git clone https://github.com/linkease/nas-packages-luci package/lean/nas-packages-luci
+git clone -b main https://github.com/linkease/nas-packages-luci package/lean/nas-packages-luci
 \cp -rf package/lean/nas-packages-luci/luci/* package/lean
 \rm -rf package/lean/nas-packages-luci
-git clone https://github.com/linkease/nas-packages package/lean/nas-packages
+git clone -b master https://github.com/linkease/nas-packages package/lean/nas-packages
 \cp -rf package/lean/nas-packages/network/services/* package/network/services
 \cp -rf package/lean/nas-packages/multimedia package
 \rm -rf package/lean/nas-packages
-git clone https://github.com/sirpdboy/luci-app-advanced package/lean/luci-app-advanced
 
 sed -i '/mt7921/d' ./.config
 sed -i '/CONFIG_DRIVER_11AC_SUPPORT/d' ./.config
