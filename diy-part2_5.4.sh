@@ -56,6 +56,7 @@ git clone https://github.com/sbwml/luci-app-alist package/lean/op-alist
 \rm -rf package/lean/op-alist
 \rm -rf feeds/luci/applications/luci-app-adbyby-plus
 git clone https://github.com/ywt114/luci-app-adbyby-plus-lite package/lean/luci-app-adbyby-plus-lite
+git clone https://github.com/ywt114/luci-app-msd_lite package/lean/luci-app-msd_lite
 git clone https://github.com/ywt114/luci-app-gpsysupgrade package/lean/luci-app-gpsysupgrade
 # \rm -rf feeds/packages/net/smartdns
 # \rm -rf feeds/luci/applications/luci-app-smartdns
