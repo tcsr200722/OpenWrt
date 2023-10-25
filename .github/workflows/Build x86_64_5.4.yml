@@ -11,6 +11,7 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
+  FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: x86_64.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2_5.4.sh
@@ -24,18 +25,20 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 360
 
-    name: Build ${{matrix.target}}
+    name: Build ${{ matrix.target.arch }}_${{ matrix.target.kernel }}
     strategy:
       fail-fast: false
       matrix:
-        target: [x86_64_5.4]
+        target:
+          - arch: "x86_64"
+            kernel: "5.4"
 
     steps:
     - name: 检查
       uses: actions/checkout@main
 
     - name: 释放磁盘空间
-      uses: ywt114/free-disk-space@main
+      uses: jlumbroso/free-disk-space@main
       with:
         tool-cache: false
         android: true
@@ -52,28 +55,28 @@ jobs:
         sudo -E rm -rf "$AGENT_TOOLSDIRECTORY" || true
         sudo -E apt -yqq update
         sudo -E apt -yqq full-upgrade
-        sudo -E apt -yqq install $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/depends3) || true
+        sudo -E apt -yqq install $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/depends) || true
         sudo -E apt -yqq autoremove --purge
         sudo -E apt -yqq autoclean
-        sudo -E apt -yqq clean
         sudo -E systemctl daemon-reload
-        sudo -E timedatectl set-timezone "$TZ"
 
         df -hT
 
     - name: 设置当前的日期
       id: date
       run: |
+        sudo timedatectl set-timezone "$TZ"
         echo "date1=$(date +'%Y%m%d')" >> $GITHUB_ENV
-        VERSION="$(echo "${{github.event.action}}" | grep -Eo " [0-9.]+" | sed -e 's/ //')" || true
-        [ "$VERSION" ] && echo "VERSION=$VERSION" >> $GITHUB_ENV || echo "VERSION=$(date +'%Y%m%d')" >> $GITHUB_ENV
 
     - name: 克隆源代码
       run: |
         git clone -b $REPO_BRANCH $REPO_URL openwrt
+        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=${{ matrix.target.kernel }}/g" openwrt/target/linux/x86/Makefile
+        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=${{ matrix.target.kernel }}/g" openwrt/target/linux/x86/Makefile
 
     - name: 自定义配置feeds
       run: |
+        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
@@ -86,8 +89,8 @@ jobs:
     - name: 执行回滚
       if: env.REVERT_COMMIT == 'true' && !cancelled()
       run: |
-        cd $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/directory1)
-        git reset --hard $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/commit1)
+        cd $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/directory)
+        git reset --hard $(curl -fsSL https://raw.githubusercontent.com/ywt114/poweroff/main/commit)
 
     - name: 安装 feeds
       working-directory: ./openwrt
@@ -137,8 +140,7 @@ jobs:
     - name: 重命名文件
       if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
-        cd openwrt/bin/targets/x86/64/
-        rename -v 's/^/${{ env.date1 }}-5.4-/' openwrt*.gz || true
+        find openwrt/bin/targets -type f \( -name "openwrt*.gz" \) -exec sh -c 'mv "$1" "$(dirname "$1")/${{ env.date1 }}-${{ matrix.target.kernel }}-$(basename "$1")"' sh {} \; 2>/dev/null || true
 
     - name: 整理文件
       id: organize
@@ -146,31 +148,31 @@ jobs:
       run: |
         mkdir -p firmware
         mkdir -p firmware/package/
-        mv -f openwrt/bin/targets/x86/64/{*squashfs-combined-efi.i*gz,*sysupgrade*} firmware/ 2>/dev/null || true
-        cp $(find openwrt/bin/packages/ -type f -name "*.ipk") firmware/package/
-        cp openwrt/.config firmware/${{matrix.target}}.config
-        cp openwrt/build_dir/target-*/linux-*/linux-*/.config firmware/${{matrix.target}}_kernel.config
+        find openwrt/bin/targets/ -type f \( -name "*squashfs-combined-efi*.gz" -o -name "*sysupgrade*" \) -exec mv {} ./firmware/ \; 2>/dev/null || true
+        find openwrt/bin/packages/ -type f \( -name "*.ipk" \) -exec mv {} ./firmware/package/ \; 2>/dev/null || true
+        mv openwrt/.config ./firmware/${{ matrix.target.arch }}_${{ matrix.target.kernel }}.config 2>/dev/null || true
+        mv openwrt/build_dir/target-*/linux-*/linux-*/.config ./firmware/${{ matrix.target.arch }}_${{ matrix.target.kernel }}_kernel.config 2>/dev/null || true
+        [ -e release ] && cp release ./firmware/release.txt
         cd firmware
         echo -n "${{ env.date1 }}" > version.txt
-        md5=$((md5sum *squashfs-combined-efi.i*gz) | awk '{print $1}') 2>/dev/null
+        md5=$(md5sum *squashfs-combined-efi*.gz | awk '{print $1}') 2>/dev/null || true
         echo -n "$md5" > md5sum.txt
         rm -rf sha256sums
-        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 上传固件目录
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       with:
-        name: ${{ env.date1 }}_${{matrix.target}}
-        path: ${{ env.FIRMWARE }}
+        name: ${{ env.date1 }}_${{ matrix.target.arch }}_${{ matrix.target.kernel }}
+        path: ./firmware/**
 
     - name: 生成发布标签
       id: tag
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
         echo "release_tag=${{ env.date1 }}" >> $GITHUB_OUTPUT
-        touch release.txt
+        [ -e release ] && cp release ./release.txt
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 上传固件发布
@@ -179,9 +181,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       with:
-        files: "${{ env.FIRMWARE }}/*"
-        name: ${{ env.date1 }}_${{matrix.target}}
-        tag_name: ${{matrix.target}}
+        files: ./firmware/*.*
+        name: ${{ env.date1 }}_${{ matrix.target.arch }}_${{ matrix.target.kernel }}
+        tag_name: ${{ matrix.target.arch }}_${{ matrix.target.kernel }}
         body_path: release.txt
 
     - name: 删除工作流
