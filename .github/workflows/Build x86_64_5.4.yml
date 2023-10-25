@@ -71,6 +71,8 @@ jobs:
     - name: 克隆源代码
       run: |
         git clone -b $REPO_BRANCH $REPO_URL openwrt
+        sed -i "s/KERNEL_PATCHVER:=*.*/KERNEL_PATCHVER:=${{ matrix.target.kernel }}/g" openwrt/target/linux/x86/Makefile
+        sed -i "s/KERNEL_TESTING_PATCHVER:=*.*/KERNEL_TESTING_PATCHVER:=${{ matrix.target.kernel }}/g" openwrt/target/linux/x86/Makefile
 
     - name: 自定义配置feeds
       run: |
